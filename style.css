@@ -472,7 +472,7 @@ input[type="file"]::file-selector-button:hover {
 .ba-slider {
   position: relative;
   width: 100%;
-  height: 220px; /* Ajusta la altura fija para móviles si es necesario */
+  aspect-ratio: 16 / 9; /* ESTO SOLUCIONA EL PROBLEMA DEL CUADRADO EN MÓVIL */
   overflow: hidden;
   border-radius: 12px;
   user-select: none;
@@ -490,20 +490,20 @@ input[type="file"]::file-selector-button:hover {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Evita que la imagen se deforme o se distorsione */
+  object-fit: cover; /* Mantiene la proporción sin estirar la imagen */
   pointer-events: none;
 }
 
 .ba-slider .before-img {
-  width: 50%; /* Valor por defecto inicial */
+  width: 50%; /* Punto de partida para el slider */
   z-index: 2;
   overflow: hidden;
-  border-right: 2px solid #ff2a2a; /* Línea divisoria roja */
+  border-right: 2px solid #ff2a2a; /* Línea divisoria */
 }
 
-/* Forzar que la imagen interna del before mantenga el ancho total del contenedor padre */
+/* Forzar que la imagen interior ocupe el espacio correcto */
 .ba-slider .before-img img {
-  width: 100% !important;
+  width: calc(100vw - 20px); /* Ajuste dinámico para que no se vea el corte */
   max-width: none;
 }
 
@@ -517,13 +517,13 @@ input[type="file"]::file-selector-button:hover {
   pointer-events: none;
 }
 
-/* Posicionamiento de las etiquetas para que no se amontonen */
+/* Etiquetas (Antes/Después) */
 .ba-slider .badge {
   position: absolute;
   top: 10px;
   z-index: 4;
-  padding: 4px 8px;
-  font-size: 10px;
+  padding: 4px 10px;
+  font-size: 12px;
   font-weight: bold;
   border-radius: 4px;
 }
