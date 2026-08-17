@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadBackgroundThumbnails();
 
-  // --- 5. SLIDER HERO TRIPLE INTERACTIVO ---
+ // --- 5. SLIDER HERO TRIPLE INTERACTIVO ---
   document.querySelectorAll('.hero-range-item').forEach(range => {
     range.addEventListener('input', (e) => {
       const sliderContainer = e.target.closest('.ba-slider');
@@ -180,19 +180,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  function loadHeroData() {
-    const savedHeroList = JSON.parse(localStorage.getItem('hero_ba_data_triple')) || [];
-    for (let i = 1; i <= 3; i++) {
-      const itemData = savedHeroList[i - 1];
-      if (itemData) {
-        const beforeSrc = document.getElementById(`hero-before-img-src-${i}`);
-        const afterSrc = document.getElementById(`hero-after-img-src-${i}`);
-        const swText = document.getElementById(`hero-before-sw-${i}`);
+  async function loadHeroData() {
+    try {
+      const { data, error } = await supabaseClient
+        .from('hero_sliders')
+        .select('*')
+        .order('slot_id', { ascending: true });
 
-        if (beforeSrc && itemData.beforeImg) beforeSrc.src = itemData.beforeImg;
-        if (afterSrc && itemData.afterImg) afterSrc.src = itemData.afterImg;
-        if (swText && itemData.softwareBefore) swText.textContent = itemData.softwareBefore;
+      if (error) {
+        console.error('Error al cargar el Hero desde Supabase:', error);
+        return;
       }
+
+      if (data && data.length > 0) {
+        data.forEach(item => {
+          const i = item.slot_id;
+          const beforeSrc = document.getElementById(`hero-before-img-src-${i}`);
+          const afterSrc = document.getElementById(`hero-after-img-src-${i}`);
+          const swText = document.getElementById(`hero-before-sw-${i}`);
+          const targetSlider = document.querySelector(`.ba-slider[data-id="${i}"]`);
+
+          if (beforeSrc && item.before_img) beforeSrc.src = item.before_img;
+          if (afterSrc && item.after_img) afterSrc.src = item.after_img;
+          if (swText && item.software_before) swText.innerHTML = `<i class="fa-solid fa-cube"></i> ${item.software_before}`;
+        });
+      }
+    } catch (err) {
+      console.error('Excepción al cargar Hero:', err);
     }
   }
   loadHeroData();
@@ -622,7 +636,6 @@ document.addEventListener('DOMContentLoaded', () => {
 if (saveBaModalBtn) {
     saveBaModalBtn.addEventListener('click', async () => {
       const targetSlotId = baSlotSelect ? baSlotSelect.value : activeHeroSlot;
-      const slotIndex = parseInt(targetSlotId) - 1;
       
       saveBaModalBtn.disabled = true;
       saveBaModalBtn.textContent = 'Subiendo archivos a la nube...';
@@ -631,12 +644,14 @@ if (saveBaModalBtn) {
         const fileBefore = baFileBeforeInput ? baFileBeforeInput.files[0] : null;
         const fileAfter = baFileAfterInput ? baFileAfterInput.files[0] : null;
 
-        let currentHeroList = JSON.parse(localStorage.getItem('hero_ba_data_triple')) || [{}, {}, {}];
-        
-        let urlBefore = currentHeroList[slotIndex]?.beforeImg || '';
-        let urlAfter = currentHeroList[slotIndex]?.afterImg || '';
+        const targetSlider = document.querySelector(`.ba-slider[data-id="${targetSlotId}"]`);
+        const beforeImgEl = targetSlider ? targetSlider.querySelector('.before-img img') : null;
+        const images = targetSlider ? targetSlider.querySelectorAll('.ba-image img') : [];
+        const afterImgEl = images.length > 1 ? images[1] : null;
 
-        // Sube a Supabase Storage si seleccionaste nuevos archivos
+        let urlBefore = beforeImgEl ? beforeImgEl.src : '';
+        let urlAfter = afterImgEl ? afterImgEl.src : '';
+
         if (fileBefore) {
           urlBefore = await uploadFile(fileBefore);
         }
@@ -647,34 +662,23 @@ if (saveBaModalBtn) {
         const softwareBeforeText = baLeftTagInput ? baLeftTagInput.value : 'Blender';
         const softwareAfterText = baRightTagInput ? baRightTagInput.value : 'Photoshop';
 
-        currentHeroList[slotIndex] = {
-          beforeImg: urlBefore,
-          afterImg: urlAfter,
-          softwareBefore: softwareBeforeText,
-          softwareAfter: softwareAfterText
-        };
+        // Guardar directamente en Supabase (tabla hero_sliders)
+        const { error } = await supabaseClient
+          .from('hero_sliders')
+          .upsert({
+            slot_id: parseInt(targetSlotId),
+            before_img: urlBefore,
+            after_img: urlAfter,
+            software_before: softwareBeforeText,
+            software_after: softwareAfterText
+          }, { onConflict: ['slot_id'] });
 
-        // Guardamos las URLs públicas en localStorage para que cualquier dispositivo las lea
-        localStorage.setItem('hero_ba_data_triple', JSON.stringify(currentHeroList));
+        if (error) throw error;
 
-        // Actualizamos la vista previa en tiempo real
-        const targetSlider = document.querySelector(`.ba-slider[data-id="${targetSlotId}"]`);
-        if (targetSlider) {
-          const beforeImgEl = targetSlider.querySelector('.before-img img');
-          const images = targetSlider.querySelectorAll('.ba-image img');
-          const afterImgEl = images.length > 1 ? images[1] : null;
-          
-          const leftTagEl = targetSlider.querySelector('.left-tag');
-          const rightTagEl = targetSlider.querySelector('.right-tag');
-
-          if (beforeImgEl && urlBefore) beforeImgEl.src = urlBefore;
-          if (afterImgEl && urlAfter) afterImgEl.src = urlAfter;
-          if (leftTagEl) leftTagEl.innerHTML = `<i class="fa-solid fa-cube"></i> ${softwareBeforeText}`;
-          if (rightTagEl) rightTagEl.innerHTML = `<i class="fa-solid fa-paintbrush"></i> ${softwareAfterText}`;
-        }
+        await loadHeroData();
 
         if (baEditModal) baEditModal.style.display = 'none';
-        alert('¡Transformación actualizada y sincronizada en la nube!');
+        alert('¡Transformación actualizada y sincronizada globalmente en la nube!');
 
       } catch (err) {
         console.error("Error:", err);
