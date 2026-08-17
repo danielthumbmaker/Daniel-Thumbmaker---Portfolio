@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/Assets/profile.jpg" type="image/x-icon">
+  <title>Designbyd3 - Portafolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- FONDO ANIMADO DIAGONAL DESENFOCADO -->
+  <div class="thumbnails-bg-container" id="thumbnails-bg-container">
+    <div class="thumbnails-bg-track" id="thumbnails-bg-track">
+      <!-- Las miniaturas se inyectarán dinámicamente aquí -->
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <h1>Designbyd3<span class="dot">.</span></h1>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#" id="nav-precios-btn">Precios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="social-links">
+        <a href="https://x.com/danithumbmaker" target="_blank" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://youtube.com/@desingbyd?si=uON9O2fKC_Hh8-mI" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://discord.com/users/934869891863957555" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      </div>
+      <a href="#contacto" class="btn-primary btn-nav">Contactar</a>
+    </div>
+    <button class="menu-toggle" id="menu-toggle-btn">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="inicio" class="hero">
+    <div class="hero-container-triple">
+      <div class="section-header center">
+        <h2>Transformación Pro</h2>
+        <p class="subtitle-red">De Render 3D a Miniatura con Alto CTR</p>
+      </div>
+
+     <!-- CONTENEDOR DE LOS 3 SLIDERS EN FILA -->
+      <div class="hero-sliders-container">
+        <!-- SLOT 1 -->
+        <div class="ba-slider portfolio-item" data-id="1">
+          <button class="card-options-btn" data-id="hero-1"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          <div class="options-dropdown">
+            <button class="dropdown-item edit-ba-btn" data-slot="1"><i class="fa-solid fa-pen"></i> Editar Transformación</button>
+            <button class="dropdown-item delete-hero-btn" data-slot="1" style="color: var(--red-neon);"><i class="fa-solid fa-trash"></i> Eliminar Contenido</button>
+          </div>
+          <div class="ba-image after-img">
+            <img id="hero-after-img-src-1" src="" alt="After">
+            <span class="badge badge-after">AFTER</span>
+            <div class="software-tag right-tag"><i class="fa-solid fa-paintbrush"></i> Photoshop</div>
+          </div>
+          <div class="ba-image before-img" id="hero-before-img-1">
+            <img id="hero-before-img-src-1" src="" alt="Before">
+            <span class="badge badge-before">BEFORE</span>
+            <div class="software-tag left-tag" id="hero-before-sw-1"><i class="fa-solid fa-cube"></i> Blender</div>
+          </div>
+          <input type="range" min="0" max="100" value="50" class="slider-range hero-range-item" data-index="1">
+          <div class="slider-line" id="hero-ba-line-1"></div>
+        </div>
+
+        <!-- SLOT 2 -->
+        <div class="ba-slider portfolio-item" data-id="2">
+          <button class="card-options-btn" data-id="hero-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          <div class="options-dropdown">
+            <button class="dropdown-item edit-ba-btn" data-slot="2"><i class="fa-solid fa-pen"></i> Editar Transformación</button>
+            <button class="dropdown-item delete-hero-btn" data-slot="2" style="color: var(--red-neon);"><i class="fa-solid fa-trash"></i> Eliminar Contenido</button>
+          </div>
+          <div class="ba-image after-img">
+            <img id="hero-after-img-src-2" src="" alt="After">
+            <span class="badge badge-after">AFTER</span>
+            <div class="software-tag right-tag"><i class="fa-solid fa-paintbrush"></i> Photoshop</div>
+          </div>
+          <div class="ba-image before-img" id="hero-before-img-2">
+            <img id="hero-before-img-src-2" src="" alt="Before">
+            <span class="badge badge-before">BEFORE</span>
+            <div class="software-tag left-tag" id="hero-before-sw-2"><i class="fa-solid fa-cube"></i> Blender</div>
+          </div>
+          <input type="range" min="0" max="100" value="50" class="slider-range hero-range-item" data-index="2">
+          <div class="slider-line" id="hero-ba-line-2"></div>
+        </div>
+
+        <!-- SLOT 3 -->
+        <div class="ba-slider portfolio-item" data-id="3">
+          <button class="card-options-btn" data-id="hero-3"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          <div class="options-dropdown">
+            <button class="dropdown-item edit-ba-btn" data-slot="3"><i class="fa-solid fa-pen"></i> Editar Transformación</button>
+            <button class="dropdown-item delete-hero-btn" data-slot="3" style="color: var(--red-neon);"><i class="fa-solid fa-trash"></i> Eliminar Contenido</button>
+          </div>
+          <div class="ba-image after-img">
+            <img id="hero-after-img-src-3" src="" alt="After">
+            <span class="badge badge-after">AFTER</span>
+            <div class="software-tag right-tag"><i class="fa-solid fa-paintbrush"></i> Photoshop</div>
+          </div>
+          <div class="ba-image before-img" id="hero-before-img-3">
+            <img id="hero-before-img-src-3" src="" alt="Before">
+            <span class="badge badge-before">BEFORE</span>
+            <div class="software-tag left-tag" id="hero-before-sw-3"><i class="fa-solid fa-cube"></i> Blender</div>
+          </div>
+          <input type="range" min="0" max="100" value="50" class="slider-range hero-range-item" data-index="3">
+          <div class="slider-line" id="hero-ba-line-3"></div>
+        </div>
+      </div>
+
+      <!-- GRUPO DE BOTONES + ESTADO DE COMISIONES -->
+      <div class="button-group">
+        <div id="toggle-commission-btn" class="commission-status-wrapper" title="Estado de Comisiones">
+          <div id="status-badge" class="status-badge open">
+            <span class="status-dot"></span>
+            <span id="status-text">COMISIONES ABIERTAS</span>
+          </div>
+        </div>
+        <a href="#trabajos" class="btn-primary">Ver mis trabajos</a>
+        <button id="hero-precios-btn" class="btn-secondary">Ver los precios</button>
+      </div>
+    </div>
+
+    <!-- SECCIÓN DE TRABAJOS RECIENTES EN EL INICIO -->
+    <div class="recent-work-preview">
+      <div class="section-header">
+        <div>
+          <h2>Últimos Trabajos</h2>
+          <p class="subtitle-red">Proyectos recién agregados</p>
+        </div>
+      </div>
+      <main class="portfolio-grid" id="recent-portfolio-grid"></main>
+    </div>
+  </section>
+
+  <!-- TRABAJOS COMPLETOS CON CATEGORÍAS -->
+  <section id="trabajos" class="recent-work">
+    <div class="section-header">
+      <div>
+        <h2>Todos los Trabajos</h2>
+        <p class="subtitle-red">¡Explora todo el catálogo por categoría!</p>
+      </div>
+    </div>
+
+    <div class="filter-container">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="cartoony">Cartoony</button>
+      <button class="filter-btn" data-filter="before-after">Before/After</button>
+      <button class="filter-btn" data-filter="realistic">Realista</button>
+      <button class="filter-btn" data-filter="IRL">IRL</button>
+    </div>
+
+    <main class="portfolio-grid" id="portfolio-grid"></main>
+  </section>
+
+  <!-- APARTADO DE CONTACTO -->
+  <section id="contacto" class="contact-section">
+    <div class="section-header center">
+      <h2>Contacto Directo</h2>
+      <p class="subtitle-red">¿Listo para mejorar tu CTR? Hablemos de tu proyecto</p>
+    </div>
+    <div class="contact-grid">
+      <a href="https://discord.com/users/934869891863957555" target="_blank" class="contact-card">
+        <div class="contact-icon"><i class="fa-brands fa-discord"></i></div>
+        <h3>Discord</h3>
+        <p>@danithumbmaker / Mensaje directo</p>
+        <span class="contact-action">Conectar <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="https://x.com/danithumbmaker" target="_blank" class="contact-card">
+        <div class="contact-icon"><i class="fa-brands fa-x-twitter"></i></div>
+        <h3>X (Twitter)</h3>
+        <p>@danithumbmaker / DM Abiertos</p>
+        <span class="contact-action">Escribir <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="https://youtube.com/@desingbyd?si=uON9O2fKC_Hh8-mI" target="_blank" class="contact-card">
+        <div class="contact-icon"><i class="fa-brands fa-youtube"></i></div>
+        <h3>YouTube</h3>
+        <p>Mira mis procesos y trabajos</p>
+        <span class="contact-action">Visitar <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- MODAL DE PRECIOS -->
+  <div id="pricing-modal" class="modal">
+    <div class="modal-pricing-content">
+      <span class="modal-close" id="close-pricing">&times;</span>
+      <div class="section-header center">
+        <h2>Precios y Servicios</h2>
+        <p class="subtitle-red">Diseño enfocado en alto Click-Through Rate (CTR)</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card featured">
+          <div class="popular-badge">MÁS POPULAR</div>
+          <h3>Miniatura Roblox</h3>
+          <div class="price">$15 <span>USD</span></div>
+          <a href="#contacto" class="btn-primary full-width close-pricing-action">Ordenar</a>
+        </div>
+
+        <div class="price-card featured">
+          <div class="popular-badge">MÁS POPULAR</div>
+          <h3>Miniaturas IRL</h3>
+          <div class="price">$25 <span>USD</span></div>
+          <a href="#contacto" class="btn-primary full-width close-pricing-action">Ordenar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTÓN FLOTANTE SUBIR -->
+  <button id="open-upload-btn" class="upload-float-btn" title="Panel de Gestión">
+    <i class="fa-solid fa-plus"></i>
+  </button>
+
+  <!-- MODAL DE SUBIDA / PANEL DE GESTIÓN -->
+  <div id="upload-modal" class="modal">
+    <div class="upload-card">
+      <span class="modal-close" id="close-upload">&times;</span>
+      <h2>Panel de Gestión y Subida</h2>
+      <form id="upload-form">
+        
+        <div class="form-group">
+          <label>Destino de la Publicación</label>
+          <select id="target-destination">
+            <option value="portfolio">Galería de Trabajos</option>
+            <option value="hero">Hero Principal (Slider Grande)</option>
+            <option value="bg-thumbnails">Fondo Dinámico (Miniaturas en Movimiento)</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="title-group">
+          <label>Título del Proyecto</label>
+          <input type="text" id="thumb-title" placeholder="Ej: Roblox Escape Race">
+        </div>
+        
+        <div class="form-group" id="category-group">
+          <label>Estilo / Categoría</label>
+          <select id="thumb-category">
+            <option value="cartoony">Cartoony</option>
+            <option value="before-after">Before/After</option>
+            <option value="realistic">Realista</option>
+            <option value="IRL">IRL</option>
+          </select>
+        </div>
+
+        <!-- GRUPO PARA SUBIDA MÚLTIPLE DE FONDO -->
+        <div id="bg-file-group" class="form-group" style="display: none;">
+          <label>Seleccionar Múltiples Miniaturas (Fondo)</label>
+          <input type="file" id="thumb-file-bg-multi" accept="image/*" multiple>
+          <small style="color: var(--text-muted); font-size: 0.75rem; margin-top: 4px;">Puedes seleccionar varias imágenes a la vez manteniendo presionado Ctrl o Shift.</small>
+        </div>
+
+        <div id="ba-file-group" class="ba-inputs-container" style="display: none;">
+          <div class="form-group">
+            <label>Software Utilizado en Before (3D)</label>
+            <select id="thumb-software-before">
+              <option value="Blender / 3D">Blender / 3D</option>
+              <option value="Cinema 4D">Cinema 4D</option>
+              <option value="Maya">Maya</option>
+              <option value="Roblox Studio">Roblox Studio</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Imagen BEFORE (3D Render)</label>
+            <input type="file" id="thumb-file-before" accept="image/*">
+          </div>
+          <div class="form-group">
+            <label>Imagen AFTER (Photoshop)</label>
+            <input type="file" id="thumb-file-after" accept="image/*">
+          </div>
+        </div>
+
+        <div class="form-group" id="single-file-group">
+          <label>Imagen de la Miniatura</label>
+          <input type="file" id="thumb-file" accept="image/*">
+        </div>
+
+        <button type="submit" id="submit-btn" class="submit-btn">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- VISOR DE IMAGEN -->
+  <div id="image-modal" class="modal">
+    <span class="modal-close" id="close-image">&times;</span>
+    <img class="modal-content" id="modal-img" alt="Vista previa">
+    <div id="modal-caption"></div>
+  </div>
+
+  <!-- MODAL LOGIN ADMIN -->
+  <div id="admin-auth-modal" class="modal" style="display: none;">
+    <div class="modal-content auth-card">
+      <span class="close-btn" id="close-admin-auth">&times;</span>
+      <div class="modal-header">
+        <i class="fa-solid fa-user-shield red-icon"></i>
+        <h2>Acceso Administrador</h2>
+      </div>
+      <form id="admin-auth-form">
+        <div class="form-group">
+          <label>Correo Electrónico</label>
+          <input type="email" id="admin-email-input" required placeholder="tucorreo@dominio.com">
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" id="admin-password-input" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-primary admin-btn">Entrar al Panel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE EDICIÓN DEL HERO -->
+  <div id="ba-edit-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal" id="close-ba-modal">&times;</button>
+      <div class="modal-header">
+        <i class="fa-solid fa-sliders"></i>
+        <h2>Editar Transformación Pro</h2>
+      </div>
+      
+      <div class="form-group">
+        <label>Seleccionar Slot del Hero</label>
+        <select id="ba-slot-select" class="form-control">
+          <option value="1">Slot 1 (Izquierda)</option>
+          <option value="2">Slot 2 (Centro)</option>
+          <option value="3">Slot 3 (Derecha)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Imagen "Before" (Izquierda)</label>
+        <input type="file" id="ba-file-before" class="form-control-file" accept="image/*">
+      </div>
+
+      <div class="form-group">
+        <label>Imagen "After" (Derecha)</label>
+        <input type="file" id="ba-file-after" class="form-control-file" accept="image/*">
+      </div>
+
+      <div class="form-group">
+        <label>Etiqueta Software Izquierda (Ej: Blender / Cinema 4D)</label>
+        <input type="text" id="ba-left-tag" class="form-control" placeholder="Ej: Cinema 4D">
+      </div>
+
+      <div class="form-group">
+        <label>Etiqueta Software Derecha (Ej: Photoshop)</label>
+        <input type="text" id="ba-right-tag" class="form-control" placeholder="Photoshop">
+      </div>
+
+      <button id="save-ba-modal-btn" class="submit-btn">Guardar Cambios</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
