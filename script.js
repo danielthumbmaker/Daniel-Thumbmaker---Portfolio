@@ -92,12 +92,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 2. ESTADO DE COMISIONES ---
+  // --- 2. ESTADO DE COMISIONES (SINCRONIZADO CON SUPABASE) ---
   const statusBadge = document.getElementById('status-badge');
   const statusText = document.getElementById('status-text');
   const toggleCommissionBtn = document.getElementById('toggle-commission-btn');
 
-  let isCommissionOpen = localStorage.getItem('commission_status') !== 'closed';
+  let isCommissionOpen = true; // Valor por defecto
+
+  // Función para leer el estado desde Supabase
+  async function loadCommissionStatus() {
+    try {
+      const { data, error } = await supabaseClient
+        .from('app_config')
+        .select('value')
+        .eq('key', 'commission_status')
+        .single();
+
+      if (error) {
+        console.error('Error al cargar comisiones:', error);
+        return;
+      }
+
+      if (data) {
+        isCommissionOpen = data.value !== 'closed';
+        updateCommissionUI();
+      }
+    } catch (err) {
+      console.error('Excepción al cargar comisiones:', err);
+    }
+  }
 
   function updateCommissionUI() {
     if (!statusBadge || !statusText) return;
@@ -114,15 +137,32 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleCommissionBtn.addEventListener('click', async () => {
       const { data: { session } } = await supabaseClient.auth.getSession();
       if (!session) {
-        return;
+        return; // Si no es admin, no hace nada
       }
+
+      // Cambiar estado localmente de forma provisional
       isCommissionOpen = !isCommissionOpen;
-      localStorage.setItem('commission_status', isCommissionOpen ? 'open' : 'closed');
+      const newState = isCommissionOpen ? 'open' : 'closed';
       updateCommissionUI();
+
+      // Guardar el nuevo estado en Supabase para que se actualice en todos lados
+      const { error } = await supabaseClient
+        .from('app_config')
+        .upsert({ key: 'commission_status', value: newState });
+
+      if (error) {
+        console.error('Error al actualizar comisiones en Supabase:', error);
+        alert('Hubo un error al sincronizar el estado de las comisiones.');
+        // Revertir en caso de error
+        isCommissionOpen = !isCommissionOpen;
+        updateCommissionUI();
+      }
     });
   }
-  updateCommissionUI();
 
+  // Cargar el estado al iniciar la página
+  loadCommissionStatus();
+  
   // --- 3. MODAL DE PRECIOS ---
   const pricingModal = document.getElementById('pricing-modal');
   const navPreciosBtn = document.getElementById('nav-precios-btn');
