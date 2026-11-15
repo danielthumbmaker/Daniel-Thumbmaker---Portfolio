@@ -164,7 +164,8 @@
 
     <main class="portfolio-grid" id="portfolio-grid"></main>
   </section>
-<!-- APARTADO DE CONTACTO -->
+
+  <!-- APARTADO DE CONTACTO -->
   <section id="contacto" class="contact-section">
     <div class="section-header center">
       <h2>Contacto Directo</h2>
@@ -299,28 +300,6 @@
     <div id="modal-caption"></div>
   </div>
 
-  <!-- MODAL LOGIN ADMIN -->
-  <div id="admin-auth-modal" class="modal" style="display: none;">
-    <div class="modal-content auth-card">
-      <span class="close-btn" id="close-admin-auth">&times;</span>
-      <div class="modal-header">
-        <i class="fa-solid fa-user-shield red-icon"></i>
-        <h2>Acceso Administrador</h2>
-      </div>
-      <form id="admin-auth-form">
-        <div class="form-group">
-          <label>Correo Electrónico</label>
-          <input type="email" id="admin-email-input" required placeholder="tucorreo@dominio.com">
-        </div>
-        <div class="form-group">
-          <label>Contraseña</label>
-          <input type="password" id="admin-password-input" required placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn-primary admin-btn">Entrar al Panel</button>
-      </form>
-    </div>
-  </div>
-
   <!-- MODAL DE EDICIÓN DEL HERO -->
   <div id="ba-edit-modal" class="modal" style="display: none;">
     <div class="modal-content">
@@ -363,7 +342,32 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="script.js"></script>
+  <!-- MODAL LOGIN ADMIN -->
+  <div id="admin-auth-modal" class="modal" style="display: none;">
+    <div class="modal-content auth-card">
+      <span class="close-btn" id="close-admin-auth">&times;</span>
+      <div class="modal-header">
+        <i class="fa-solid fa-user-shield red-icon"></i>
+        <h2>Acceso Administrador</h2>
+      </div>
+      <form id="admin-auth-form">
+        <div class="form-group">
+          <label>Correo Electrónico</label>
+          <input type="email" id="admin-email-input" required placeholder="tucorreo@dominio.com">
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" id="admin-password-input" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-primary admin-btn">Entrar al Panel</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
+
+  <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -181,6 +181,7 @@ body.is-admin .commission-status-wrapper:hover {
   border-radius: 16px;
   border: 1px solid var(--border-color);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  user-select: none;
 }
 
 .ba-slider .ba-image {
@@ -196,6 +197,7 @@ body.is-admin .commission-status-wrapper:hover {
   height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
 }
 
 .ba-slider .before-img {
@@ -206,6 +208,7 @@ body.is-admin .commission-status-wrapper:hover {
   width: 50%;
   overflow: hidden;
   z-index: 2;
+  border-right: 2px solid var(--red-neon);
 }
 
 .ba-slider .before-img img {
@@ -295,7 +298,6 @@ body.is-admin .commission-status-wrapper:hover {
   width: 100%;
 }
 
-/* Para que en celulares o pantallas pequeñas se apilen bien */
 @media (max-width: 768px) {
   .contact-grid {
     grid-template-columns: 1fr;
@@ -413,22 +415,6 @@ body.is-admin .upload-float-btn { display: flex !important; align-items: center;
 .modal-content { max-width: 95%; max-height: 80vh; border-radius: 12px; border: 2px solid var(--red-neon); }
 #modal-caption { margin-top: 15px; font-weight: 700; text-align: center; }
 
-.auth-card {
-  max-width: 400px; width: 100%;
-  background: #0f0f0f;
-  border: 1px solid #ff0000;
-  box-shadow: 0 0 20px rgba(255, 0, 60, 0.25);
-  border-radius: 12px;
-  padding: 25px;
-}
-.modal-header { text-align: center; margin-bottom: 20px; }
-.modal-header h2 { color: #fff; font-size: 1.4rem; margin-top: 10px; }
-.red-icon { font-size: 2.2rem; color: #ff003c; text-shadow: 0 0 10px rgba(255, 0, 60, 0.6); }
-.admin-btn {
-  width: 100%; margin-top: 10px; background: #ff003c; color: #fff;
-  font-weight: bold; border: none; padding: 12px; border-radius: 6px; cursor: pointer;
-}
-
 input[type="file"]::file-selector-button {
   background: #27272a;
   color: #fff;
@@ -473,76 +459,4 @@ input[type="file"]::file-selector-button:hover {
   .nav-links.active { right: 0; }
   .nav-right { display: none; }
   .section-header h2 { font-size: 1.4rem; }
-}
-
-/* --- CORRECCIÓN RESPONSIVE PARA LOS SLIDERS DEL HERO --- */
-.ba-slider {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9; /* ESTO SOLUCIONA EL PROBLEMA DEL CUADRADO EN MÓVIL */
-  overflow: hidden;
-  border-radius: 12px;
-  user-select: none;
-}
-
-.ba-slider .ba-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.ba-slider .ba-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Mantiene la proporción sin estirar la imagen */
-  pointer-events: none;
-}
-
-.ba-slider .before-img {
-  width: 50%; /* Punto de partida para el slider */
-  z-index: 2;
-  overflow: hidden;
-  border-right: 2px solid #ff2a2a; /* Línea divisoria */
-}
-
-/* Forzar que la imagen interior ocupe el espacio correcto */
-.ba-slider .before-img img {
-  width: calc(100vw - 20px); /* Ajuste dinámico para que no se vea el corte */
-  max-width: none;
-}
-
-.ba-slider .slider-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: #ff2a2a;
-  z-index: 3;
-  pointer-events: none;
-}
-
-/* Etiquetas (Antes/Después) */
-.ba-slider .badge {
-  position: absolute;
-  top: 10px;
-  z-index: 4;
-  padding: 4px 10px;
-  font-size: 12px;
-  font-weight: bold;
-  border-radius: 4px;
-}
-
-.ba-slider .badge-before {
-  left: 10px;
-  background: #000;
-  color: #fff;
-}
-
-.ba-slider .badge-after {
-  right: 10px;
-  background: #ff2a2a;
-  color: #fff;
 }
